@@ -91,7 +91,7 @@
 
   function formatCompact(value) {
     var n = Math.floor(Math.max(0, value));
-    if (!isFinite(n)) return "";
+    if (!isFinite(n)) return "∞";
     var locale = SBC.locale || "en";
     if (n < 1000000) {
       try { return n.toLocaleString(locale); }
@@ -193,12 +193,12 @@
     var size = Math.max(2, 5.2 - Math.max(0, text.length - 3) * 0.36);
     counterEl.style.fontSize = size + "rem";
     var line = tx("perSecond", "per second") + ": " + formatRate(currentCps());
-    if (clickPower > 1) line += "  �  " + tx("tapWord", "tap") + " x" + formatCompact(clickPower);
-    if (bestBurst > 0) line += "  �  " + tx("burstWord", "burst") + " " + bestBurst + "/s";
+    if (clickPower > 1) line += "  ·  " + tx("tapWord", "tap") + " x" + formatCompact(clickPower);
+    if (bestBurst > 0) line += "  ·  " + tx("burstWord", "burst") + " " + bestBurst + "/s";
     perSecondEl.textContent = line;
     paintShop();
     if (!topPanel.hidden) {
-      topPreview.textContent = fill(tx("thisRun", "This run: {score} score � {rate}/s � burst {burst}/s"), {
+      topPreview.textContent = fill(tx("thisRun", "This run: {score} score · {rate}/s · burst {burst}/s"), {
         score: formatCompact(score),
         rate: formatRate(currentCps()),
         burst: String(bestBurst)
@@ -579,4 +579,3 @@
   }, 100);
   setInterval(saveGame, 2000);
 })();
- 
